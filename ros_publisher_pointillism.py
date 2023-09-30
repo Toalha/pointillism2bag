@@ -153,7 +153,7 @@ if __name__ == '__main__':
                     start_time = time.time()
                     header.stamp = rospy.Time.from_sec(start_time)
                 else:
-                    header.stamp = rospy.Time.from_sec(start_time + i/30)
+                    header.stamp = rospy.Time.from_sec(start_time + i/60)
             header = std_msgs.msg.Header()
             header.frame_id = "pointillism_ego_vehicle"
 
