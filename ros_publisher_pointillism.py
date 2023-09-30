@@ -130,7 +130,7 @@ if __name__ == '__main__':
             if(run_ros_node):
                 ros_image.header.stamp = rospy.Time.now()
             else:
-                #simulates the time of the image at 30 FPS
+                #simulates the time of the image at 60 FPS
                 ros_image.header.stamp = rospy.Time.from_sec(time.time())
             ros_image.height = img_np.shape[0]
             ros_image.width = img_np.shape[1]
@@ -153,6 +153,7 @@ if __name__ == '__main__':
                     start_time = time.time()
                     header.stamp = rospy.Time.from_sec(start_time)
                 else:
+                    #simulates the time of the image at 60 FPS
                     header.stamp = rospy.Time.from_sec(start_time + i/60)
             header = std_msgs.msg.Header()
             header.frame_id = "pointillism_ego_vehicle"
