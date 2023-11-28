@@ -25,12 +25,12 @@ def create_pointcloud(points, fields, header, sensor):
     else:
         #aligns the pointclouds of the 2 radars with the camera
         if(sensor == 'radar0'):
-            points[:,4]-=0.5
+            points[:,4]-=0.75
         elif(sensor == 'radar1'):
-            points[:,4]+=0.5
+            points[:,4]+=0.75
 
         for point in points:
-            #points_aux.append([-point[4], -point[2], point[3], point[5], point[6], point[7], point[9]]) #DECENTE
+            #points_aux.append([-point[4], -point[2], point[3], point[5], point[6], point[7], point[9]]) 
             points_aux.append([-point[2], point[4], point[3], point[5], point[6], point[7], point[9]])
 
 
@@ -130,7 +130,7 @@ if __name__ == '__main__':
             if(run_ros_node):
                 ros_image.header.stamp = rospy.Time.now()
             else:
-                #simulates the time of the image at 60 FPS
+                #simulates the time of the image at 30 FPS
                 ros_image.header.stamp = rospy.Time.from_sec(time.time())
             ros_image.height = img_np.shape[0]
             ros_image.width = img_np.shape[1]
@@ -153,9 +153,7 @@ if __name__ == '__main__':
                     start_time = time.time()
                     header.stamp = rospy.Time.from_sec(start_time)
                 else:
-                    #simulates the time of the image at 60 FPS
                     header.stamp = rospy.Time.from_sec(start_time + i/60)
-            header = std_msgs.msg.Header()
             header.frame_id = "pointillism_ego_vehicle"
 
             #creates the pointclouds
